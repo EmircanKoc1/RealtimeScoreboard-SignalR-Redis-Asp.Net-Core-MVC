@@ -10,6 +10,7 @@
     <Folder Include="Hubs\" />
     <Folder Include="HubTypes\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\signalr\" />
   </ItemGroup>
 
   <ItemGroup>
