@@ -4,10 +4,10 @@ namespace RealtimeScoreBoard.WebApp.Services
 {
     public class ScoreboardService : IScoreboardService
     {
-        private readonly IRedisSortedSetRepository _repository;
+        private readonly IRedisScoreboardRepository _repository;
 
         public const string SORTED_SET_KEY = "SeasonGoolScores";
-        public ScoreboardService(IRedisSortedSetRepository repository)
+        public ScoreboardService(IRedisScoreboardRepository repository)
         {
             _repository = repository;
         }
