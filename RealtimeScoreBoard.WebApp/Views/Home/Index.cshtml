@@ -1,0 +1,47 @@
+﻿@section Scripts {
+    <script src="~/signalr/signalr_index_view.js"></script>
+}
+
+
+<h1>Aktif bağlantı sayısı : <span id="connected-count"> 0</span></h1>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-4">
+            <input id="member" class="col-3 input-group mb-3" type="text" placeholder="member ı girin">
+            <input id="score" class="col-3 input-group mb-3" type="text" placeholder="score değerini girin">
+
+            <button id="increase-button" type="button" class="btn btn-primary">Skoru arttır</button>
+            <button id="decrease-button" type="button" class="btn btn-danger"> Skoru azalt</button>
+            <button id="update-button" type="button" class="btn btn-success">Skoru güncelle</button>
+        </div>
+        <div class="col-8">
+            
+            <table class="table table-striped">
+                <caption>Takımların bu sezonki golleri</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" >Takım</th>
+                        <th scope="col">Score</th>
+                    </tr>
+
+                </thead>
+                <tbody id="table-tbody">
+                    @* <tr>
+                        <td scope="col">gs</td>
+                        <td scope="col">2</td>
+                    </tr> *@
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+   
+
+
+</div>
