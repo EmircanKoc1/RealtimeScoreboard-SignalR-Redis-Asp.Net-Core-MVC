@@ -1,6 +1,6 @@
 ﻿namespace RealtimeScoreBoard.WebApp.Repositories
 {
-    public interface IRedisSortedSetRepository
+    public interface IRedisScoreboardRepository
     {
         public Task IncreaseScore(string key, string member, double score);
 

@@ -4,11 +4,11 @@ using StackExchange.Redis;
 
 namespace RealtimeScoreBoard.WebApp.Repositories
 {
-    public class RedisSortedSetRepository : IRedisSortedSetRepository /*, IDisposable*/
+    public class RedisScoreboardRepository : IRedisScoreboardRepository /*, IDisposable*/
     {
         private readonly RedisContext _context;
         private readonly IDatabase _database;
-        public RedisSortedSetRepository(RedisContext context)
+        public RedisScoreboardRepository(RedisContext context)
         {
             _context = context;
             _database = context.GetDatabase();
@@ -23,7 +23,7 @@ namespace RealtimeScoreBoard.WebApp.Repositories
 
         public async Task<IEnumerable<KeyValuePair<string, string>>?> GetScoresWithMembers(string key)
         {
-            var membersWithScores = await _database.SortedSetRangeByRankWithScoresAsync(key);
+            var membersWithScores = await _database.SortedSetRangeByRankWithScoresAsync(key: key, order: Order.Descending);
 
             return membersWithScores.Select(sse =>
             KeyValuePair.Create<string, string>(sse.Element, sse.Score.ToString()));
