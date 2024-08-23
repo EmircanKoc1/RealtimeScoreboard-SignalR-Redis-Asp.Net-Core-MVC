@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using RealtimeScoreBoard.WebApp.Contexts;
 using RealtimeScoreBoard.WebApp.HubTypes;
 using RealtimeScoreBoard.WebApp.Services;
 
@@ -7,23 +6,23 @@ namespace RealtimeScoreBoard.WebApp.Hubs
 {
     public class ScoreboardHub : Hub<INotifyType>
     {
-        private readonly IRedisPubSubService _redisPubSubService;
-        private readonly RedisContext _redisContext;
-        public ScoreboardHub(IRedisPubSubService redisPubSubService, RedisContext redisContext)
+        private readonly IScoreboardService _scoreBoardService;
+
+        public ScoreboardHub(IScoreboardService scoreboardService)
         {
-            _redisPubSubService = redisPubSubService;
-            _redisContext = redisContext;
+            _scoreBoardService = scoreboardService;
         }
 
-        public async Task IncreaseScoreboardScore()
+        public async Task IncreaseScoreboardScore(string member, double score)
         {
-
+            await _scoreBoardService.IncreaseScoreAsync(member, score);
+            _scoreBoardService.GetScoreWithMembersAsync();
             await Clients.All.ReceiveScoreUpdate();
         }
 
         public async Task DecreaseScoreboardScore()
         {
-            
+
             await Clients.All.ReceiveScoreUpdate();
         }
 

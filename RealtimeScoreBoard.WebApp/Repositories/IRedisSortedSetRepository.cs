@@ -8,7 +8,7 @@
 
         public Task UpdateScore(string key, string member, double score);
 
-        public Task<IEnumerable<ValueTuple<string, string>>> GetScoresWithMembers(string key);
+        public Task<IEnumerable<KeyValuePair<string, string>>> GetScoresWithMembers(string key);
 
     }
 }

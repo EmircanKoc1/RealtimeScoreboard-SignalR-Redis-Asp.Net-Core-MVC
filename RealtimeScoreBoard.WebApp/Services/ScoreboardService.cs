@@ -12,26 +12,26 @@ namespace RealtimeScoreBoard.WebApp.Services
             _repository = repository;
         }
 
-        public async Task DecreaseScoreAsync(string member, int score)
+        public async Task DecreaseScoreAsync(string member, double score)
         {
 
             await _repository.DecreaseScore(SORTED_SET_KEY, member, score);
 
         }
 
-        public async Task IncreaseScoreAsync(string member, int score)
+        public async Task IncreaseScoreAsync(string member, double score)
         {
             await _repository.IncreaseScore(SORTED_SET_KEY, member, score);
 
         }
 
-        public async Task UpdateScoreAsync(string member, int score)
+        public async Task UpdateScoreAsync(string member, double score)
         {
             await _repository.UpdateScore(SORTED_SET_KEY, member, score);
 
         }
 
-        public async Task<IEnumerable<ValueTuple<string, string>>> GetScoreWithMembersAsync(string key)
+        public async Task<IEnumerable<KeyValuePair<string, string>>> GetScoreWithMembersAsync()
         {
             var result =await _repository.GetScoresWithMembers(SORTED_SET_KEY);
             return result;

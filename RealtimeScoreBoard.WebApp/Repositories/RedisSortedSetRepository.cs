@@ -19,14 +19,14 @@ namespace RealtimeScoreBoard.WebApp.Repositories
             await _database.SortedSetDecrementAsync(key, member, score);
         }
 
-        
 
-        public async Task<IEnumerable<(string, string)>?> GetScoresWithMembers(string key)
+
+        public async Task<IEnumerable<KeyValuePair<string, string>>?> GetScoresWithMembers(string key)
         {
             var membersWithScores = await _database.SortedSetRangeByRankWithScoresAsync(key);
 
-            return membersWithScores.Select(sse => 
-            ValueTuple.Create<string, string>(sse.Element, sse.Score.ToString()));
+            return membersWithScores.Select(sse =>
+            KeyValuePair.Create<string, string>(sse.Element, sse.Score.ToString()));
 
         }
 
@@ -38,7 +38,7 @@ namespace RealtimeScoreBoard.WebApp.Repositories
         public async Task UpdateScore(string key, string member, double score)
         {
             await _database.SortedSetAddAsync(key, member, score);
-            
+
         }
 
         //public void Dispose()
