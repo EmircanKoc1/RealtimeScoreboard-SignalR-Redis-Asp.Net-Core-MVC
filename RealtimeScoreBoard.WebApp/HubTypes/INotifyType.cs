@@ -2,7 +2,8 @@
 {
     public interface INotifyType
     {
-        Task ReceiveScoreUpdate();
+        Task ReceiveScoreboardScores(IEnumerable<KeyValuePair<string, string>> membersWithScores);
 
+        Task ReceiveConnectedClientCount(long connectedCount);
     }
 }
