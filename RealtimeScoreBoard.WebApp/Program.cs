@@ -1,10 +1,18 @@
-using StackExchange;
+using RealtimeScoreBoard.WebApp.Contexts;
+using RealtimeScoreBoard.WebApp.Hubs;
+using RealtimeScoreBoard.WebApp.Repositories;
+using RealtimeScoreBoard.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSingleton<RedisContext>(p => new RedisContext(builder.Configuration.GetConnectionString("Redis")!));
+builder.Services.AddSingleton<IRedisScoreboardRepository, RedisScoreboardRepository>();
+builder.Services.AddSingleton<IScoreboardService, ScoreboardService>();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -18,6 +26,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapHub<ScoreboardHub>("/scoreboardhub");
 
 app.MapControllerRoute(
     name: "default",
