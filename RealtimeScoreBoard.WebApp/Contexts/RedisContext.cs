@@ -2,7 +2,7 @@
 
 namespace RealtimeScoreBoard.WebApp.Contexts
 {
-    public class RedisContext
+    public class RedisContext : IDisposable
     {
         protected ConnectionMultiplexer _multiplexer;
         public ConnectionMultiplexer ConnectionMultiplexer => _multiplexer;
@@ -13,13 +13,13 @@ namespace RealtimeScoreBoard.WebApp.Contexts
         public RedisContext(ConfigurationOptions options)
             => _multiplexer = ConnectionMultiplexer.Connect(options);
 
-        public RedisContext(ConnectionMultiplexer multiplexer)
-            => _multiplexer = multiplexer;
 
         public IDatabase GetDatabase()
             => _multiplexer.GetDatabase();
 
-
-
+        public void Dispose()
+        {
+           ConnectionMultiplexer.Dispose();
+        }
     }
 }
